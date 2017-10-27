@@ -1,11 +1,14 @@
+import { Constants } from 'expo'
 import React from 'react'
 import { Platform, View, StatusBar } from 'react-native'
-import { Constants } from 'expo'
 import { TabNavigator, StackNavigator } from 'react-navigation'
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
 import DeckList from './components/DeckList'
 import CreateDeck from './components/CreateDeck'
 import { Entypo, MaterialCommunityIcons } from '@expo/vector-icons'
 import { red, white } from './utils/colors'
+import reducer from './reducers'
 
 const Tabs = TabNavigator(
   {
@@ -62,18 +65,20 @@ const MainNavigator = StackNavigator({
 export default class App extends React.Component {
   render () {
     return (
-      <View style={{ flex: 1 }}>
-        <View
-          style={{ backgroundColor: red, height: Constants.statusBarHeight }}
-        >
-          <StatusBar
-            translucent
-            backgroundColor={red}
-            barStyle='light-content'
-          />
+      <Provider store={createStore(reducer)}>
+        <View style={{ flex: 1 }}>
+          <View
+            style={{ backgroundColor: red, height: Constants.statusBarHeight }}
+          >
+            <StatusBar
+              translucent
+              backgroundColor={red}
+              barStyle='light-content'
+            />
+          </View>
+          <MainNavigator />
         </View>
-        <MainNavigator />
-      </View>
+      </Provider>
     )
   }
 }
