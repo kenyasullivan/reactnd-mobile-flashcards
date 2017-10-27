@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, TextInput, TouchableOpacity } from 'react-native'
+import { Alert, View, Text, TextInput, TouchableOpacity } from 'react-native'
 import styled from 'styled-components/native'
 import { connect } from 'react-redux'
 import { createDeck } from '../actions'
@@ -47,8 +47,18 @@ class CreateDeck extends React.Component {
   }
 
   submit = () => {
-    this.props.dispatch(createDeck(this.state.title))
+    const { title } = this.state
+
+    if (!title) {
+      Alert.alert('Please enter a title.')
+      return
+    }
+
+    // @todo handle title already exists
+
+    this.props.dispatch(createDeck(title))
     this.props.navigation.navigate('DeckList') // @todo navigate to deck detail for deck
+
     this.setState(() => ({ title: '' }))
   }
 
