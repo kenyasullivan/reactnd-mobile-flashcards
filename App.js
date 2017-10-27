@@ -4,9 +4,12 @@ import { Platform, View, StatusBar } from 'react-native'
 import { TabNavigator, StackNavigator } from 'react-navigation'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
+import { Entypo, MaterialCommunityIcons } from '@expo/vector-icons'
 import DeckList from './components/DeckList'
 import CreateDeck from './components/CreateDeck'
-import { Entypo, MaterialCommunityIcons } from '@expo/vector-icons'
+import DeckDetail from './components/DeckDetail'
+import CreateCard from './components/CreateCard'
+import Quiz from './components/Quiz'
 import { red, white } from './utils/colors'
 import reducer from './reducers'
 
@@ -56,9 +59,34 @@ const Tabs = TabNavigator(
   }
 )
 
+const stackNavigationOptions = {
+  headerTintColor: white,
+  headerStyle: {
+    backgroundColor: red
+  }
+}
+
 const MainNavigator = StackNavigator({
   Home: {
     screen: Tabs
+  },
+  DeckDetail: {
+    screen: DeckDetail,
+    navigationOptions: stackNavigationOptions
+  },
+  CreateCard: {
+    screen: CreateCard,
+    navigationOptions: {
+      title: 'Add Card',
+      ...stackNavigationOptions
+    }
+  },
+  Quiz: {
+    screen: Quiz,
+    navigationOptions: {
+      title: 'Quiz',
+      ...stackNavigationOptions
+    }
   }
 })
 
