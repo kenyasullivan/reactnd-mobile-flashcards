@@ -12,8 +12,12 @@ export function receiveDecks (decks) {
 
 export function createDeck (title) {
   const deck = {
-    [title]: { title }
+    [title]: {
+      title,
+      questions: []
+    }
   }
+
   saveDeck(deck)
   return {
     type: CREATE_DECK,
