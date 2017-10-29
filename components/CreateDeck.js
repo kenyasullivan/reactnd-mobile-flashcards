@@ -3,7 +3,7 @@ import { Alert, View, Text, TextInput, Platform } from 'react-native'
 import { default as styled, css } from 'styled-components/native'
 import { connect } from 'react-redux'
 import { createDeck } from '../actions'
-import { PrimaryBtn, PrimaryBtnText } from './Buttons'
+import { PrimaryButton, PrimaryButtonText } from './Buttons'
 import { gray } from '../utils/colors'
 
 const FormView = styled.View`
@@ -59,9 +59,9 @@ class CreateDeck extends React.Component {
           value={this.state.title}
           onChangeText={title => this.setState(() => ({ title }))}
         />
-        <PrimaryBtn onPress={this.submit}>
-          <PrimaryBtnText>Create Deck</PrimaryBtnText>
-        </PrimaryBtn>
+        <PrimaryButton onPress={this.submit}>
+          <PrimaryButtonText>Create Deck</PrimaryButtonText>
+        </PrimaryButton>
       </FormView>
     )
   }
