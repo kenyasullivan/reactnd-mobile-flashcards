@@ -1,9 +1,10 @@
 import React from 'react'
-import { Alert, View, Text, TextInput, TouchableOpacity } from 'react-native'
-import styled from 'styled-components/native'
+import { Alert, View, Text, TextInput, Platform } from 'react-native'
+import { default as styled, css } from 'styled-components/native'
 import { connect } from 'react-redux'
 import { createDeck } from '../actions'
-import { red, white } from '../utils/colors'
+import { PrimaryBtn, PrimaryBtnText } from './Buttons'
+import { gray } from '../utils/colors'
 
 const FormView = styled.View`
   flex: 1;
@@ -20,25 +21,12 @@ const Title = styled.Text`
 const TitleInput = styled.TextInput`
   font-size: 24px;
   width: 100%;
-  border-width: 1px;
-  border-color: black;
-  border-radius: 5px;
   padding: 10px;
-`
 
-const SubmitBtn = styled.TouchableOpacity`
-  background-color: ${red};
-  border-radius: 5px;
-  height: 50px;
-  justify-content: center;
-  align-items: center;
-  padding-left: 20px;
-  padding-right: 20px;
-`
-
-const BtnText = styled.Text`
-  font-size: 24px;
-  color: ${white};
+  ${Platform.OS === 'ios' && css`
+    border: 1px solid ${gray};
+    border-radius: 5px;
+  `}
 `
 
 class CreateDeck extends React.Component {
@@ -71,9 +59,9 @@ class CreateDeck extends React.Component {
           value={this.state.title}
           onChangeText={title => this.setState(() => ({ title }))}
         />
-        <SubmitBtn onPress={this.submit}>
-          <BtnText>Create Deck</BtnText>
-        </SubmitBtn>
+        <PrimaryBtn onPress={this.submit}>
+          <PrimaryBtnText>Create Deck</PrimaryBtnText>
+        </PrimaryBtn>
       </FormView>
     )
   }
