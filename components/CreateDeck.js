@@ -57,7 +57,7 @@ class CreateDeck extends React.Component {
     // @todo handle title already exists
 
     this.props.dispatch(createDeck(title))
-    this.props.navigation.navigate('DeckList') // @todo navigate to deck detail for deck
+    this.props.navigation.navigate('DeckDetail', { title })
 
     this.setState(() => ({ title: '' }))
   }

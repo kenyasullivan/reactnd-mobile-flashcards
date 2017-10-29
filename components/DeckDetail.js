@@ -2,10 +2,16 @@ import React from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
 
 export default class DeckDetail extends React.Component {
+  static navigationOptions = ({ navigation }) => {
+    return {
+      title: navigation.state.params.title
+    }
+  }
+
   render () {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>Deck Detail</Text>
+        <Text>{this.props.navigation.state.params.title}</Text>
         <TouchableOpacity
           onPress={() => this.props.navigation.navigate('CreateCard')}
         >
