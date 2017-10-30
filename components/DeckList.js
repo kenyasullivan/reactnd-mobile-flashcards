@@ -5,7 +5,7 @@ import styled from 'styled-components/native'
 import { getDecks } from '../utils/api'
 import { receiveDecks } from '../actions'
 import Deck from './Deck'
-import { PrimaryBtn, PrimaryBtnText } from './Buttons'
+import { PrimaryButton, PrimaryButtonText } from './Buttons'
 
 const DeckListView = styled.View`
   flex: 1;
@@ -21,7 +21,7 @@ const EmptyListView = styled.View`
 `
 
 const EmptyListText = styled.Text`
-  font-size: 30px;
+  font-size: 32px;
   text-align: center;
   padding-bottom: 20px;
 `
@@ -47,11 +47,11 @@ class DeckList extends React.Component {
       return (
         <EmptyListView>
           <EmptyListText>You have no flash card decks.</EmptyListText>
-          <PrimaryBtn
+          <PrimaryButton
             onPress={() => this.props.navigation.navigate('CreateDeck')}
           >
-            <PrimaryBtnText>Create your first deck</PrimaryBtnText>
-          </PrimaryBtn>
+            <PrimaryButtonText>Create your first deck</PrimaryButtonText>
+          </PrimaryButton>
         </EmptyListView>
       )
     }
