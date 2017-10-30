@@ -34,20 +34,26 @@ class DeckDetail extends React.Component {
   }
 
   render () {
+    const { deck } = this.props
+    const { title } = deck
+
     return (
       <DeckDetailView>
         <CenteredView>
-          <DeckTitle>{this.props.deck.title}</DeckTitle>
-          <StyledCardCount deck={this.props.deck} />
+          <DeckTitle>{title}</DeckTitle>
+          <StyledCardCount deck={deck} />
         </CenteredView>
         <CenteredView>
           <Button
-            onPress={() => this.props.navigation.navigate('CreateCard')}
+            onPress={() =>
+              this.props.navigation.navigate('CreateCard', { title })}
             style={{ marginBottom: 10 }}
           >
             <ButtonText>Add Card</ButtonText>
           </Button>
-          <PrimaryButton onPress={() => this.props.navigation.navigate('Quiz')}>
+          <PrimaryButton
+            onPress={() => this.props.navigation.navigate('Quiz', { deck })}
+          >
             <PrimaryButtonText>Start Quiz</PrimaryButtonText>
           </PrimaryButton>
         </CenteredView>

@@ -1,32 +1,15 @@
 import React from 'react'
-import { Alert, View, Text, TextInput, Platform } from 'react-native'
-import { default as styled, css } from 'styled-components/native'
+import { Alert, Text } from 'react-native'
+import styled from 'styled-components/native'
 import { connect } from 'react-redux'
 import { createDeck } from '../actions'
 import { PrimaryButton, PrimaryButtonText } from './Buttons'
-import { gray } from '../utils/colors'
-
-const FormView = styled.View`
-  flex: 1;
-  justify-content: space-around;
-  align-items: center;
-  padding: 20px;
-`
+import { FormView, TextField } from './Forms'
 
 const Title = styled.Text`
   font-size: 48px;
   text-align: center;
-`
-
-const TitleInput = styled.TextInput`
-  font-size: 24px;
-  width: 100%;
-  padding: 10px;
-
-  ${Platform.OS === 'ios' && css`
-    border: 1px solid ${gray};
-    border-radius: 5px;
-  `}
+  margin-bottom: 50px;
 `
 
 class CreateDeck extends React.Component {
@@ -42,7 +25,10 @@ class CreateDeck extends React.Component {
       return
     }
 
-    // @todo handle title already exists
+    if (this.props.decks[title]) {
+      Alert.alert('A deck with that title already exists.')
+      return
+    }
 
     this.props.dispatch(createDeck(title))
     this.props.navigation.navigate('DeckDetail', { title })
@@ -54,12 +40,12 @@ class CreateDeck extends React.Component {
     return (
       <FormView>
         <Title>What is the title of your new deck?</Title>
-        <TitleInput
+        <TextField
           placeholder='Deck Title'
           value={this.state.title}
           onChangeText={title => this.setState(() => ({ title }))}
         />
-        <PrimaryButton onPress={this.submit}>
+        <PrimaryButton onPress={this.submit} style={{ marginTop: 50 }}>
           <PrimaryButtonText>Create Deck</PrimaryButtonText>
         </PrimaryButton>
       </FormView>
@@ -67,4 +53,8 @@ class CreateDeck extends React.Component {
   }
 }
 
-export default connect()(CreateDeck)
+function mapStateToProps (decks) {
+  return { decks }
+}
+
+export default connect(mapStateToProps)(CreateDeck)

@@ -4,7 +4,7 @@ import { Text } from 'react-native'
 export default function CardCount ({ style, deck }) {
   return (
     <Text style={style}>
-      {deck.questions.length} card{deck.questions.length === 1 ? '' : 's'}
+      {deck.cards.length} card{deck.cards.length === 1 ? '' : 's'}
     </Text>
   )
 }
