@@ -37,6 +37,8 @@ class DeckDetail extends React.Component {
     const { deck } = this.props
     const { title } = deck
 
+    const hasCards = Boolean(deck.cards && deck.cards.length)
+
     return (
       <DeckDetailView>
         <CenteredView>
@@ -53,6 +55,8 @@ class DeckDetail extends React.Component {
           </Button>
           <PrimaryButton
             onPress={() => this.props.navigation.navigate('Quiz', { deck })}
+            disabled={!hasCards}
+            style={!hasCards && { opacity: 0.3 }}
           >
             <PrimaryButtonText>Start Quiz</PrimaryButtonText>
           </PrimaryButton>
