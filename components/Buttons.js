@@ -10,6 +10,7 @@ const ButtonBase = styled.TouchableOpacity`
   align-items: center;
   padding-left: 20px;
   padding-right: 20px;
+  margin: 10px;
 `
 
 export const Button = ButtonBase.extend`

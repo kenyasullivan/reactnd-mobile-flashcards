@@ -52,6 +52,13 @@ export default class Card extends React.Component {
     })
   }
 
+  componentWillReceiveProps ({ card }) {
+    const currCard = this.props.card
+    if (card && currCard && currCard !== card) {
+      this.state.flipAnimated.setValue(0)
+    }
+  }
+
   flipCard = () => {
     Animated.spring(this.state.flipAnimated, {
       toValue: this.state.flipPosition >= 90 ? 0 : 180,

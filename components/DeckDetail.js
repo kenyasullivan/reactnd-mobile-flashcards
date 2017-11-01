@@ -49,7 +49,6 @@ class DeckDetail extends React.Component {
           <Button
             onPress={() =>
               this.props.navigation.navigate('CreateCard', { title })}
-            style={{ marginBottom: 10 }}
           >
             <ButtonText>Add Card</ButtonText>
           </Button>
