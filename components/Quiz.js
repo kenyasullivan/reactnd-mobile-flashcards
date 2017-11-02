@@ -4,6 +4,10 @@ import styled from 'styled-components/native'
 import QuizFrame from './QuizFrame'
 import { Button, ButtonText } from './Buttons'
 import { gray } from '../utils/colors'
+import {
+  clearLocalNotification,
+  setLocalNotification
+} from '../utils/notifications'
 
 const ProgressText = styled.Text`
   margin: 10px;
@@ -41,6 +45,10 @@ export default class Quiz extends React.Component {
   state = {
     index: 0,
     results: []
+  }
+
+  componentDidMount () {
+    clearLocalNotification().then(setLocalNotification)
   }
 
   answerCard = result => {
