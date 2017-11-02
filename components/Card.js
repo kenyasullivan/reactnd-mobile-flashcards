@@ -7,17 +7,17 @@ import {
   StyleSheet
 } from 'react-native'
 import styled from 'styled-components/native'
+import { MaterialIcons } from '@expo/vector-icons'
 import { red, white } from '../utils/colors'
 
 const BackCard = styled.TouchableHighlight`
   justify-content: center;
-  align-items: center;
+  align-items: stretch;
   align-self: stretch;
   height: 400px;
   border: 2px solid black;
   border-radius: 8px;
   background-color: ${white};
-  padding: 20px;
   margin: 10px;
 `
 
@@ -25,9 +25,25 @@ const FrontCard = BackCard.extend`
   background-color: ${red};
 `
 
+const CardContent = styled.View`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+`
+
 const CardText = styled.Text`
   font-size: 48px;
   text-align: center;
+`
+
+const FlipIcon = styled(MaterialIcons).attrs({
+  size: 30
+})`
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  color: ${props => props.color};
 `
 
 export default class Card extends React.Component {
@@ -74,16 +90,22 @@ export default class Card extends React.Component {
       <View style={styles.cardContainer}>
         <Animated.View style={[styles.cardWrapper, frontFaceStyle]}>
           <FrontCard onPress={this.flipCard}>
-            <CardText style={{ color: white }}>
-              {this.props.card.question}
-            </CardText>
+            <CardContent>
+              <CardText style={{ color: white }}>
+                {this.props.card.question}
+              </CardText>
+              <FlipIcon name='flip-to-back' color={white} />
+            </CardContent>
           </FrontCard>
         </Animated.View>
         <Animated.View
           style={[styles.cardWrapper, styles.backCardWrapper, backFaceStyle]}
         >
           <BackCard onPress={this.flipCard}>
-            <CardText>{this.props.card.answer}</CardText>
+            <CardContent>
+              <CardText>{this.props.card.answer}</CardText>
+              <FlipIcon name='flip-to-front' color='black' />
+            </CardContent>
           </BackCard>
         </Animated.View>
       </View>
