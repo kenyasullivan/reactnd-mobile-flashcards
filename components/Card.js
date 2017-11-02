@@ -66,6 +66,19 @@ export default class Card extends React.Component {
       inputRange: [0, 180],
       outputRange: ['180deg', '360deg']
     })
+
+    // Workaround for lack of backface-visibility support on Android found here:
+    // https://github.com/facebook/react-native/issues/1973
+
+    this.frontOpacity = this.state.flipAnimated.interpolate({
+      inputRange: [89, 90],
+      outputRange: [1, 0]
+    })
+
+    this.backOpacity = this.state.flipAnimated.interpolate({
+      inputRange: [89, 90],
+      outputRange: [0, 1]
+    })
   }
 
   componentWillReceiveProps ({ card }) {
@@ -84,8 +97,14 @@ export default class Card extends React.Component {
   }
 
   render () {
-    const frontFaceStyle = { transform: [{ rotateY: this.frontCardRotation }] }
-    const backFaceStyle = { transform: [{ rotateY: this.backCardRotation }] }
+    const frontFaceStyle = {
+      opacity: this.frontOpacity,
+      transform: [{ rotateY: this.frontCardRotation }]
+    }
+    const backFaceStyle = {
+      opacity: this.backOpacity,
+      transform: [{ rotateY: this.backCardRotation }]
+    }
     return (
       <View style={styles.cardContainer}>
         <Animated.View style={[styles.cardWrapper, frontFaceStyle]}>

@@ -93,7 +93,7 @@ export default class Quiz extends React.Component {
       return (
         <QuizResultsView>
           <View>
-            <QuizScore>{score} %</QuizScore>
+            <QuizScore>{score}%</QuizScore>
             <QuizRemark>{this.getQuizRemark(score)}</QuizRemark>
           </View>
           <QuizResultsButtons>
