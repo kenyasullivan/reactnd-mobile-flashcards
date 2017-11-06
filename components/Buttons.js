@@ -1,11 +1,12 @@
 import React from 'react'
-import { Text, TouchableOpacity } from 'react-native'
+import { Text, TouchableOpacity, StyleSheet } from 'react-native'
 import styled from 'styled-components/native'
 import { red, white } from '../utils/colors'
 
 const ButtonBase = styled.TouchableOpacity`
   border-radius: 5px;
   height: 50px;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   padding-left: 20px;
@@ -25,8 +26,16 @@ export const PrimaryButton = ButtonBase.extend`
 export const ButtonText = styled.Text`
   font-size: 24px;
   color: black;
+  text-align: center;
 `
 
 export const PrimaryButtonText = ButtonText.extend`
   color: ${white};
 `
+
+export const ButtonStyles = StyleSheet.create({
+  icon: {
+    marginLeft: -10,
+    marginRight: 10
+  }
+})

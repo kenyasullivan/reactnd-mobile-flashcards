@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, TouchableOpacity } from 'react-native'
+import { View, Text } from 'react-native'
 import styled from 'styled-components/native'
 import { connect } from 'react-redux'
 import { white, gray } from '../utils/colors'
@@ -19,11 +19,18 @@ const DeckDetailView = CenteredView.extend`
 const DeckTitle = styled.Text`
   font-size: 48px;
   color: black;
+  text-align: center;
 `
 
 const StyledCardCount = styled(CardCount)`
   font-size: 32px;
   color: ${gray};
+`
+
+const StartQuizButton = PrimaryButton.extend.attrs({
+  opacity: props => (props.disabled ? '0.3' : '1')
+})`
+  opacity: ${props => props.opacity};
 `
 
 class DeckDetail extends React.Component {
@@ -52,13 +59,12 @@ class DeckDetail extends React.Component {
           >
             <ButtonText>Add Card</ButtonText>
           </Button>
-          <PrimaryButton
+          <StartQuizButton
             onPress={() => this.props.navigation.navigate('Quiz', { deck })}
             disabled={!hasCards}
-            style={!hasCards && { opacity: 0.3 }}
           >
             <PrimaryButtonText>Start Quiz</PrimaryButtonText>
-          </PrimaryButton>
+          </StartQuizButton>
         </CenteredView>
       </DeckDetailView>
     )
