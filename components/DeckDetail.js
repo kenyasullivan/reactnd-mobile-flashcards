@@ -19,6 +19,7 @@ const DeckDetailView = CenteredView.extend`
 const DeckTitle = styled.Text`
   font-size: 48px;
   color: black;
+  text-align: center;
 `
 
 const StyledCardCount = styled(CardCount)`

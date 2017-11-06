@@ -33,7 +33,7 @@ const CardContent = styled.View`
 `
 
 const CardText = styled.Text`
-  font-size: 48px;
+  font-size: 42px;
   text-align: center;
 `
 
