@@ -47,15 +47,20 @@ export default class Quiz extends React.Component {
     results: []
   }
 
-  componentDidMount () {
-    clearLocalNotification().then(setLocalNotification)
-  }
-
   answerCard = result => {
-    this.setState(state => ({
-      index: state.index + 1,
-      results: [...state.results, result]
-    }))
+    this.setState(state => {
+      const { index, results } = state
+      const { deck } = this.props.navigation.state.params
+
+      if (index === deck.cards.length - 1) {
+        clearLocalNotification().then(setLocalNotification)
+      }
+
+      return {
+        index: index + 1,
+        results: [...results, result]
+      }
+    })
   }
 
   getQuizRemark = score => {
@@ -108,7 +113,6 @@ export default class Quiz extends React.Component {
       )
     }
 
-    // @todo animate transition from one quiz frame to next
     return (
       <View style={{ flex: 1, alignItems: 'stretch' }}>
         <ProgressText>{index + 1} / {total}</ProgressText>
